@@ -16,8 +16,9 @@ public class CongresspersonActivity extends Activity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_congressperson);
-    TextView name = (TextView) findViewById(R.id.name);
-    name.setText("Senator Boxer");
+    TextView nameView = (TextView) findViewById(R.id.name);
+    String name = getIntent().getStringExtra("name");
+    nameView.setText(name);
 
     findViewById(R.id.youtube).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {

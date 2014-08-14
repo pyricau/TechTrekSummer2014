@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CongressListActivity extends Activity {
 
@@ -17,7 +15,7 @@ public class CongressListActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_congresslist);
 
-    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
     adapter.add("John Smith 1");
     adapter.add("John Smith 2");
     adapter.add("John Smith 3");
@@ -29,6 +27,8 @@ public class CongressListActivity extends Activity {
       @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Context context = CongressListActivity.this;
         Intent intent = new Intent(context, CongresspersonActivity.class);
+        String name = adapter.getItem(position);
+        intent.putExtra("name", name);
         startActivity(intent);
       }
     });
