@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
-public class CongressPersonActivity extends Activity {
+public class CongressPersonDetailActivity extends Activity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

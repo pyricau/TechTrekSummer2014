@@ -55,7 +55,7 @@ public class CongressListActivity extends Activity {
     congressListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Context context = CongressListActivity.this;
-        Intent intent = new Intent(context, CongressPersonActivity.class);
+        Intent intent = new Intent(context, CongressPersonDetailActivity.class);
         CongressService.Role role = data.objects.get(position);
         intent.putExtra("name", role.person.name);
         intent.putExtra("youtubeid", role.person.youtubeid);
