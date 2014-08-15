@@ -18,19 +18,24 @@ public class CongressPersonActivity extends Activity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_congressperson);
+
     TextView nameView = (TextView) findViewById(R.id.name);
     String name = getIntent().getStringExtra("name");
-    final String youtubeid = getIntent().getStringExtra("youtubeid");
     nameView.setText(name);
+
+    final String youtubeid = getIntent().getStringExtra("youtubeid");
     findViewById(R.id.youtube).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         openYoutubeChannel("http://www.youtube.com/user/" + youtubeid);
       }
     });
+
     ImageView imageView = (ImageView) findViewById(R.id.picture);
     String id = getIntent().getStringExtra("id");
     Picasso.with(this)
         .load("https://www.govtrack.us/data/photos/" + id + "-200px.jpeg")
+        .fit()
+        .centerInside()
         .into(imageView);
   }
 

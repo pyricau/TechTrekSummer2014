@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -21,6 +22,9 @@ public class CongressListActivity extends Activity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_congresslist);
+
+    final ListView congressListView = (ListView) findViewById(R.id.congress_list);
+    final ProgressBar progressSpinner = (ProgressBar) findViewById(R.id.spinner);
 
     final ArrayAdapter<String> adapter =
         new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
@@ -36,6 +40,9 @@ public class CongressListActivity extends Activity {
         for (CongressService.Role role : data.objects) {
           adapter.add(role.person.name);
         }
+        // Hide the loading spinner, show the list with contents.
+        progressSpinner.setVisibility(View.GONE);
+        congressListView.setVisibility(View.VISIBLE);
       }
 
       @Override public void failure(RetrofitError error) {
@@ -43,8 +50,6 @@ public class CongressListActivity extends Activity {
             Toast.LENGTH_SHORT).show();
       }
     });
-
-    ListView congressListView = (ListView) findViewById(R.id.congress_list);
 
     congressListView.setAdapter(adapter);
     congressListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
