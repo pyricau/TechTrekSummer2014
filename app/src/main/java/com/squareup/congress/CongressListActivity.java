@@ -8,6 +8,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class CongressListActivity extends Activity {
 
@@ -15,10 +20,25 @@ public class CongressListActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_congresslist);
 
-    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-    adapter.add("John Smith 1");
-    adapter.add("John Smith 2");
-    adapter.add("John Smith 3");
+    final ArrayAdapter<String> adapter =
+        new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+
+    RestAdapter restAdapter =
+        new RestAdapter.Builder().setEndpoint("https://www.govtrack.us").build();
+    CongressService service = restAdapter.create(CongressService.class);
+
+    service.list(new Callback<CongressService.Data>() {
+      @Override public void success(CongressService.Data data, Response response) {
+        for (CongressService.Role role : data.objects) {
+          adapter.add(role.person.name);
+        }
+      }
+
+      @Override public void failure(RetrofitError error) {
+        Toast.makeText(CongressListActivity.this, "Woops: " + error.getMessage(),
+            Toast.LENGTH_SHORT).show();
+      }
+    });
 
     ListView congressListView = (ListView) findViewById(R.id.congress_list);
 
