@@ -2,7 +2,7 @@
 
 Today we are going to create an app that uses the data from https://www.govtrack.us . We’ll display the list of members of congress, and then we’ll display more details and actions when you click on a member of congress.
 
-TODO Add screenshot of final app here?
+![](https://raw.githubusercontent.com/pyricau/TechTrekSummer2014/master/demo.gif)
 
 We’re here to help, so don’t hesitate to ask any question.
 
