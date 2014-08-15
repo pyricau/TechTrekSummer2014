@@ -192,7 +192,8 @@ The URL for a picture is https://www.govtrack.us/data/photos/PERSONID-200px.jpeg
 
 ## Styling things
 
-* TODO Chris can you take it from here and add some styling steps?
+* You can add more margin (android:layout_marginBottom="16dp") between elements on the CongressPersonActivity to soften the presentation of the screen.
+* You can try building a custom listview adapter for the CongressListActivity that will show the image and more data in a much prettier list. Chris, Py, or John would be happy to provide some pointers on how its done.
 
 ## Any question?
 
