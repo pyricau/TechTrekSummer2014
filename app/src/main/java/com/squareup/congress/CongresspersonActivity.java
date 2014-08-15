@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
 
-public class CongresspersonActivity extends Activity {
+public class CongressPersonActivity extends Activity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +22,16 @@ public class CongresspersonActivity extends Activity {
     String name = getIntent().getStringExtra("name");
     final String youtubeid = getIntent().getStringExtra("youtubeid");
     nameView.setText(name);
-
     findViewById(R.id.youtube).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         openYoutubeChannel("http://www.youtube.com/user/" + youtubeid);
       }
     });
+    ImageView imageView = (ImageView) findViewById(R.id.picture);
+    String id = getIntent().getStringExtra("id");
+    Picasso.with(this)
+        .load("https://www.govtrack.us/data/photos/" + id + "-200px.jpeg")
+        .into(imageView);
   }
 
   void openYoutubeChannel(String url) {
