@@ -18,11 +18,12 @@ public class CongresspersonActivity extends Activity {
     setContentView(R.layout.activity_congressperson);
     TextView nameView = (TextView) findViewById(R.id.name);
     String name = getIntent().getStringExtra("name");
+    final String youtubeid = getIntent().getStringExtra("youtubeid");
     nameView.setText(name);
 
     findViewById(R.id.youtube).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        openYoutubeChannel("http://www.youtube.com/user/SenatorBoxer");
+        openYoutubeChannel("http://www.youtube.com/user/" + youtubeid);
       }
     });
   }

@@ -16,6 +16,8 @@ import retrofit.client.Response;
 
 public class CongressListActivity extends Activity {
 
+  CongressService.Data data;
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_congresslist);
@@ -28,7 +30,9 @@ public class CongressListActivity extends Activity {
     CongressService service = restAdapter.create(CongressService.class);
 
     service.list(new Callback<CongressService.Data>() {
+
       @Override public void success(CongressService.Data data, Response response) {
+        CongressListActivity.this.data = data;
         for (CongressService.Role role : data.objects) {
           adapter.add(role.person.name);
         }
@@ -47,8 +51,9 @@ public class CongressListActivity extends Activity {
       @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Context context = CongressListActivity.this;
         Intent intent = new Intent(context, CongresspersonActivity.class);
-        String name = adapter.getItem(position);
-        intent.putExtra("name", name);
+        CongressService.Role role = data.objects.get(position);
+        intent.putExtra("name", role.person.name);
+        intent.putExtra("youtubeid", role.person.youtubeid);
         startActivity(intent);
       }
     });
